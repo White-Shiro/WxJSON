@@ -33,8 +33,19 @@
 *.out
 *.app
 
+# JetBrains
+.idea
+
+# Cmake
+/cmake-build-debug
+.cmake
+
+# ClangFormat
+.clang-format
+
+
 /.vs/
 /x64/
 /bin
-
+/_build
 ————————————————
