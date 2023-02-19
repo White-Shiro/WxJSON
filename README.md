@@ -1,2 +1,2 @@
 # WxJSON
-JSON parser
+Personal JSON parser exercise
