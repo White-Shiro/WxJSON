@@ -28,10 +28,7 @@ JSON testEscapedJSONParse() {
 			}
 		}
 	}
-} 
-
-
-
+}
 )";
 	return JsonParser::parse(escaped);
 }
@@ -50,8 +47,8 @@ int main() {
 	auto name = js["glossary"]["GlossDiv"]["GlossList"]["GlossEntry"]["GlossSee"].asString();
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
 
-	JSON v3 = true;
-	v3[2] = 3.;
+	JSON v2 = true;
+	v2[2] = 13.f;
 
 	std::cout << "name: " << name << std::endl;
 	std::cout << "time used: " << duration.count() << "ms" << std::endl;

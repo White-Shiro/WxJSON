@@ -15,6 +15,19 @@ public:
 		Null, Object, Array, String, Number, Boolean
 	};
 
+	using JSONArray = std::vector<std::shared_ptr<JSON> >;
+	using JSONObject = std::map<string, std::shared_ptr<JSON> >;
+
+	union {
+		std::shared_ptr<JSONObject> object_value{};
+		std::shared_ptr<JSONArray> array;
+		std::shared_ptr<string> string_value;
+		double number_value;
+		bool boolean_value;
+	};
+
+	Type type;
+
 	explicit JSON() : type(Type::Null) {
 		number_value = 0;
 		boolean_value = false;
@@ -46,9 +59,6 @@ public:
 		boolean_value = boolean;
 		type = Type::Boolean;
 
-
-		//test
-		array = std::make_shared<JSONArray>();
 	}
 
 	JSON(const JSON& other) {
@@ -156,18 +166,6 @@ public:
 		return *this;
 	}
 
-	using JSONArray = std::vector<std::shared_ptr<JSON> >;
-	using JSONObject = std::map<string, std::shared_ptr<JSON> >;
-
-	union {
-		std::shared_ptr<JSONArray> array;
-		std::shared_ptr<JSONObject> object_value;
-		std::shared_ptr<string> string_value;
-		double number_value;
-		bool boolean_value;
-	};
-
-	Type type;
 
 	inline bool isObject() const { return type == Type::Object; }
 
@@ -247,13 +245,13 @@ public:
 			case Type::Array:
 				break;
 			case Type::String: {
-				_convertToArray(std::move(*string_value), idx + 1);
+				_convertToArray(std::move(*string_value), idx);
 			} break;
 			case Type::Number:
-				_convertToArray(number_value, idx + 1);
+				_convertToArray(number_value, idx);
 				break;
 			case Type::Boolean:
-				_convertToArray(boolean_value, idx + 1);
+				_convertToArray(boolean_value, idx);
 				break;
 		}
 
